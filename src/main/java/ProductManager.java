@@ -4,10 +4,10 @@ import java.util.Queue;
 public interface ProductManager {
 
     public Pedido addPedido (String producto, int cantidad, User usuario);
-    public List<Productos> SortByPrice(); //Enviamos algo?
-    public List<Productos> SortBySells(); //Enviamos??
-    public List<Pedido> Realizados(User user); //String user? int id?
-    public Queue<Pedido> Servir();
+    public List<Producto> sortByPrice(); //Enviamos algo?
+    public List<Producto> sortBySells(); //Enviamos??
+    public List<Pedido> realizados(User user); //String user? int id?
+    public Pedido servir();
 
 
 }

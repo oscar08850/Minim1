@@ -1,13 +1,17 @@
-import java.util.Collection;
+public class Producto {
 
-public class Productos {
 
 
 
     String producto;
-    int precio;
+    double precio;
     int cantidad;
     int ventas;
+
+    public Producto(String producto, double precio){
+        this.producto = producto;
+        this.precio = precio;
+    }
 
     public String getProducto() {
         return producto;
@@ -17,11 +21,11 @@ public class Productos {
         this.producto = producto;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 

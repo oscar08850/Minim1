@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Queue;
 
 public class Pedido {
@@ -13,10 +12,10 @@ public class Pedido {
 
     public int id;  //Hace falta???
 
-    Queue<Productos> listaPedido;
+    Queue<Producto> listaPedido;
 
 
-    public void addProducto(Productos o){
+    public void addProducto(Producto o){
         listaPedido.add(o);
     }
 
@@ -28,11 +27,11 @@ public class Pedido {
         this.id = id;
     }
 
-    public Queue<Productos> getListaPedido() {
+    public Queue<Producto> getListaPedido() {
         return listaPedido;
     }
 
-    public void setListaPedido(Queue<Productos> listaPedido) {
+    public void setListaPedido(Queue<Producto> listaPedido) {
         this.listaPedido = listaPedido;
     }
 
