@@ -6,8 +6,7 @@ import java.util.Queue;
 public class ProductManagerImpl implements ProductManager {
 
     List<Producto> productoList;
-    List<String> listaAuxiliar;
-    List<Pedido> pedidoList;
+
     Queue<Pedido> pendingPedido;
     HashMap<String, User> usuarios;
     private static ProductManagerImpl manager;
@@ -24,7 +23,19 @@ public class ProductManagerImpl implements ProductManager {
 
 
 
+
     /*
+
+    Bocata 1 Alex
+    cocacola 1 Alex
+
+
+    //
+
+
+
+
+
     Queue<Pedido>
     List<Pedido>
     LinkedList<Producto>()
@@ -39,7 +50,6 @@ public class ProductManagerImpl implements ProductManager {
         this.productoList.add(producto2);
         this.productoList.add(producto3);
         this.usuarios = new HashMap<String, User>();
-        this.pedidoList = new LinkedList<Pedido>();
         this.pendingPedido = new LinkedList<Pedido>();
     }
 
@@ -55,8 +65,13 @@ public class ProductManagerImpl implements ProductManager {
      */
 
 
+    public void addPedido(Pedido pedido) {
+        this.pendingPedido.add(pedido);
+    }
 
-    public List<Producto> sortByPrice() {
+
+
+        public List<Producto> sortByPrice() {
         //Ordenar
         // Collections.sort Java (Comparator)
         return this.productoList;
@@ -72,16 +87,29 @@ public class ProductManagerImpl implements ProductManager {
 
     //me da el primer pedido de la lista
     public void processPedido(Pedido pedido){
-        listaAuxiliar = pedido.getProductNames(); //
+        List<LP> listaAuxiliar = pedido.getLPs(); //
         System.out.println(listaAuxiliar);
-
-
+        for(LP lp : listaAuxiliar){
+            System.out.println(lp.producto);
+            System.out.println(lp.cantidad);
+            Producto producto = getProducto(lp.producto);
+            producto.addVentas(lp.cantidad);
+        }
 
     }
+
 
     public Pedido servir() {
         Pedido p = this.pendingPedido.remove(); // lista pedidos ---> el primer pedido = p
         processPedido(p); //2Cocacola 2 donuts // añadir vendas a cada producto
         return p;
+    }
+
+    private Producto getProducto(String nombreProducto){
+        for(Producto p: this.productoList) {
+            if(p.getProducto().equals(nombreProducto))
+            return p;
+        }
+        return null;
     }
 }

@@ -11,20 +11,34 @@ public class ProductManagerTest {
         for(Producto p: productoList){
             System.out.println(p.getProducto());
             System.out.println(p.getPrecio());
+            System.out.println(p.getVentas());
         }
 
 
 
-        /*
+
 
 
 
         Pedido pedido = new Pedido();
-        pedido.addLineaPedido(2,"CocaCola");
-        pedido.addLineaPedido(3,"CafeLlet");
+        pedido.addLP("Cocacola",2);
+        pedido.addLP("CafeLlet",3);
         pedido.setUser("1111");
         pm.addPedido(pedido); //Push1
+        pm.servir();
 
+
+        productoList = pm.sortByPrice();
+
+        for(Producto p: productoList){
+
+            System.out.println("nom " + p.getProducto());
+            System.out.println("precio " + p.getPrecio());
+            System.out.println("ventas " + p.getVentas());
+        }
+
+        pm.realizados("1111");
+        /*
         Pedido pedido2 = new Pedido();
         pedido2.addLineaPedido(4,"CocaCola");
         pedido2.addLineaPedido(1,"Donut");

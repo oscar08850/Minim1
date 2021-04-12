@@ -5,7 +5,6 @@ public class Producto {
 
     public String producto;
     public double precio;
-    public int cantidad;
     public int ventas = 0;
 
     public Producto(String producto, double precio){
@@ -34,13 +33,7 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
 
     public int getVentas() {
         return ventas;

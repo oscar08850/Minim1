@@ -13,25 +13,32 @@ public class Pedido {
      */
 
     //
-    private List<String> productNames = new ArrayList<String>();
+    private List<LP> productNames = new ArrayList<LP>();
     private String user;
     //
-    private int id;  //Hace falta???
 
-    public Queue<Producto> listaPedido;
-
+/*
     public Pedido(String user, List<String> productNames){
         this.user = user;
         this.productNames = productNames;
     }
 
+*/
 
-    public List<String> getProductNames() {
-        return productNames;
+    public Pedido(){
+
     }
 
-    public void setProductNames(List<String> productNames) {
-        this.productNames = productNames;
+
+
+    public void addLP(String producto, int cantidad){
+        LP liniaproducto = new LP(producto,cantidad);
+        this.productNames.add(liniaproducto);
+    }
+
+
+    public List<LP> getLPs() {
+        return productNames;
     }
 
     public String getUser() {
@@ -42,24 +49,5 @@ public class Pedido {
         this.user = user;
     }
 
-    public void addProducto(Producto o){
-        listaPedido.add(o);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Queue<Producto> getListaPedido() {
-        return listaPedido;
-    }
-
-    public void setListaPedido(Queue<Producto> listaPedido) {
-        this.listaPedido = listaPedido;
-    }
 
 }
