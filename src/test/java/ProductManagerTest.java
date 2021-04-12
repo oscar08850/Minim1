@@ -4,12 +4,13 @@ public class ProductManagerTest {
 
     public static void main(String[] args) {
 
-        ProductManager pm = new ProductManagerImpl();
+        ProductManager pm = new ProductManagerImpl(); // 3 comandas
 
         List<Producto> productoList = pm.sortByPrice();
 
         for(Producto p: productoList){
             System.out.println(p.getProducto());
+            System.out.println(p.getPrecio());
         }
 
 

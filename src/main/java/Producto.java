@@ -3,14 +3,19 @@ public class Producto {
 
 
 
-    String producto;
-    double precio;
-    int cantidad;
-    int ventas;
+    public String producto;
+    public double precio;
+    public int cantidad;
+    public int ventas = 0;
 
     public Producto(String producto, double precio){
         this.producto = producto;
         this.precio = precio;
+    }
+
+    //Añadimos numero de ventas del producto
+    public void addVentas(int ventas){
+        this.ventas = this.ventas + ventas;
     }
 
     public String getProducto() {

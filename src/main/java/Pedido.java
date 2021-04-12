@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 public class Pedido {
@@ -10,10 +12,35 @@ public class Pedido {
     juan: 2347 : Bocata
      */
 
-    public int id;  //Hace falta???
+    //
+    private List<String> productNames = new ArrayList<String>();
+    private String user;
+    //
+    private int id;  //Hace falta???
 
-    Queue<Producto> listaPedido;
+    public Queue<Producto> listaPedido;
 
+    public Pedido(String user, List<String> productNames){
+        this.user = user;
+        this.productNames = productNames;
+    }
+
+
+    public List<String> getProductNames() {
+        return productNames;
+    }
+
+    public void setProductNames(List<String> productNames) {
+        this.productNames = productNames;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public void addProducto(Producto o){
         listaPedido.add(o);

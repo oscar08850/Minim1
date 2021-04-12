@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -5,6 +6,29 @@ import java.util.Queue;
 public class ProductManagerImpl implements ProductManager {
 
     List<Producto> productoList;
+    List<String> listaAuxiliar;
+    List<Pedido> pedidoList;
+    Queue<Pedido> pendingPedido;
+    HashMap<String, User> usuarios;
+    private static ProductManagerImpl manager;
+
+    public static ProductManagerImpl getInstance()  /*Singletone, puerta de entrada a la instancia*/
+    {
+        if (manager==null) {
+            manager = new ProductManagerImpl();
+        }
+        return manager;
+
+
+    }
+
+
+
+    /*
+    Queue<Pedido>
+    List<Pedido>
+    LinkedList<Producto>()
+     */
 
     public ProductManagerImpl(){
         this.productoList = new LinkedList<Producto>();
@@ -14,11 +38,23 @@ public class ProductManagerImpl implements ProductManager {
         this.productoList.add(producto1);
         this.productoList.add(producto2);
         this.productoList.add(producto3);
+        this.usuarios = new HashMap<String, User>();
+        this.pedidoList = new LinkedList<Pedido>();
+        this.pendingPedido = new LinkedList<Pedido>();
     }
 
-    public Pedido addPedido(String producto, int cantidad, User usuario) {
+
+    /*
+    public Pedido addPedido(List<String> listaProductos, int cantidad, User usuario) {
+        //Pedido pedido1 = new Pedido()
+        //pendingPedido.add();
+
         return null;
     }
+
+     */
+
+
 
     public List<Producto> sortByPrice() {
         //Ordenar
@@ -34,8 +70,17 @@ public class ProductManagerImpl implements ProductManager {
         return null;
     }
 
+    //me da el primer pedido de la lista
+    public void processPedido(Pedido pedido){
+        listaAuxiliar = pedido.getProductNames(); //
+        System.out.println(listaAuxiliar);
+
+
+
+    }
+
     public Pedido servir() {
-        Pedido p = this.pendingPedido.pop();
+        Pedido p = this.pendingPedido.remove(); // lista pedidos ---> el primer pedido = p
         processPedido(p); //2Cocacola 2 donuts // añadir vendas a cada producto
         return p;
     }
