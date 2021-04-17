@@ -1,3 +1,8 @@
+package Clases;
+
+import Clases.Pedido;
+
+import java.util.LinkedList;
 import java.util.List;
 
 public class User {
@@ -5,7 +10,8 @@ public class User {
     public String user;
     public int id;
 
-    public List<Pedido> listaPedido;
+    public List<Pedido> listaPedido = new LinkedList<Pedido>();
+
 
     public void setListaPedido(List<Pedido> listaPedido) {
         this.listaPedido = listaPedido;

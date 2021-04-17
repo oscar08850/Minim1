@@ -1,61 +1,97 @@
-import java.util.List;
+import Clases.Pedido;
+import Clases.Producto;
+import Clases.User;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.Assert;
+import javafx.application.Application;
+
+import java.util.logging.Logger;
+
 
 public class ProductManagerTest {
 
-    public static void main(String[] args) {
-
-        ProductManager pm = new ProductManagerImpl(); // 3 comandas
-
-        List<Producto> productoList = pm.sortByPrice();
-
-        for(Producto p: productoList){
-            System.out.println(p.getProducto());
-            System.out.println(p.getPrecio());
-            System.out.println(p.getVentas());
-        }
+    ProductManager pm = ProductManagerImpl.getInstance(); // 3 comandas
+    Pedido pedido1 = new Pedido();
+    Pedido pedido2 = new Pedido();
+    Pedido pedido3 = new Pedido();
 
 
+    @Before
+    public void init() {
+        //Creamos los productos
+        Producto producto1 = new Producto("Cocacola", 2); //Declaramos productos y precios
+        Producto producto2 = new Producto("CafeLlet", 1.5);
+        Producto producto3 = new Producto("Donut", 2.5);
+
+        //Añadimos los productos (Carta)
+        pm.addProducto(producto1);
+        pm.addProducto(producto2);
+        pm.addProducto(producto3);
 
 
+        //Creamos los usuarios
+        User usuario1 = new User("1111", 1);
+        User usuario2 = new User("2222", 2);
+        User usuario3 = new User("3333", 3);
+
+        //Añadimos los usuarios al HashMap
+        pm.addUser(usuario1);
+        pm.addUser(usuario2);
+        pm.addUser(usuario3);
+
+        //Creamos Pedidos de prueba
+        Pedido pedido1 = new Pedido();
+        Pedido pedido2 = new Pedido();
+        Pedido pedido3 = new Pedido();
 
 
+    }
 
-        Pedido pedido = new Pedido();
-        pedido.addLP("Cocacola",2);
-        pedido.addLP("CafeLlet",3);
-        pedido.setUser("1111");
-        pm.addPedido(pedido); //Push1
+    @Test
+    public void test1(){
+        pedido1.addLP("Cocacola",2);
+        pedido1.addLP("CafeLlet",3);
+        pedido1.setUser("1111");
+        //usuarios.put("1111",usuario1);
+
+        pm.addPedido(pedido1); //Push1
+        pm.servir();
+
+    }
+
+    @Test
+    public void test2() {
+        pm.muestraLista();
+
+        pm.sortByPrice();
+        pm.muestraLista();
+    }
+
+    @Test
+    public void test3() {
+        pedido1.addLP("Cocacola",2);
+        pedido1.addLP("CafeLlet",3);
+        pedido1.setUser("1111");
+        pm.addPedido(pedido1); //Push1
+
+
+        pedido2.addLP("Donut",6);
+        pedido2.addLP("CafeLlet",7);
+        pedido2.setUser("1111");
+        pm.addPedido(pedido2); //Push2
+        pm.servir();
         pm.servir();
 
 
-        productoList = pm.sortByPrice();
+        pm.getPedidoByUser("1111");
 
-        for(Producto p: productoList){
-
-            System.out.println("nom " + p.getProducto());
-            System.out.println("precio " + p.getPrecio());
-            System.out.println("ventas " + p.getVentas());
-        }
-
-        pm.realizados("1111");
-        /*
-        Pedido pedido2 = new Pedido();
-        pedido2.addLineaPedido(4,"CocaCola");
-        pedido2.addLineaPedido(1,"Donut");
-        pedido2.setUser("2222");
-        pm.addPedido(pedido2); //Push2
-
-        Pedido pedido3 = pm.servir(); //Comanda feta per pedido1 (1111) //Pop1
-
-        //List<Productos> productosList2 = pm.sortBySells();
-
-        Pedido pedido4 = pm.servir();
-
-        List<Productos> productosList2 = pm.sortBySells();
-
-        List<Pedido> listaPedido1111 = pm.realizados("1111");
-        */
+    }
 
 
+    @After
+    public void reset(){
+        pm.clear();
     }
 }

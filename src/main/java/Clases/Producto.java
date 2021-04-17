@@ -1,7 +1,6 @@
+package Clases;
+
 public class Producto {
-
-
-
 
     public String producto;
     public double precio;
