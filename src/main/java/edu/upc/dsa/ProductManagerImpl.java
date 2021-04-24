@@ -1,10 +1,11 @@
-import Clases.LP;
-import Clases.Pedido;
-import Clases.Producto;
-import Clases.User;
+package edu.upc.dsa;
+
+import edu.upc.dsa.clases.LP;
+import edu.upc.dsa.clases.Pedido;
+import edu.upc.dsa.clases.Producto;
+import edu.upc.dsa.clases.User;
 import java.util.*;
 import org.apache.log4j.Logger;
-import sun.rmi.runtime.Log;
 
 public class ProductManagerImpl implements ProductManager {
 
@@ -48,6 +49,12 @@ public class ProductManagerImpl implements ProductManager {
 
     public void addUser(User user) {
         usuarios.put(user.getUser(), user);
+    }
+
+    public User addUserById(String id){
+        usuarios.put(id,getUser(id));
+        User user = getUser(id);
+        return user;
     }
 
     public void addPedido(Pedido pedido) {
@@ -130,6 +137,25 @@ public class ProductManagerImpl implements ProductManager {
         productoList.clear();
         usuarios.clear();
         pendingPedido.clear();
+    }
+
+    public int getUserSize(){
+        return usuarios.size();
+    }
+
+    public int getProductosSize(){
+        return productoList.size();
+    }
+
+    public int getPedidosSize(){
+        return pendingPedido.size();
+    }
+
+    public Collection<User> usersDisp() { /* ??*/
+
+        logger.info("Users disponibles antes del return");
+        logger.info(usuarios.values());
+        return this.usuarios.values();
     }
 
 }

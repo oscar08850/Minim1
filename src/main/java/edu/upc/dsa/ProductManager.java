@@ -1,7 +1,10 @@
-import Clases.Pedido;
-import Clases.Producto;
-import Clases.User;
+package edu.upc.dsa;
 
+import edu.upc.dsa.clases.Pedido;
+import edu.upc.dsa.clases.Producto;
+import edu.upc.dsa.clases.User;
+
+import java.util.Collection;
 import java.util.List;
 
 public interface ProductManager {
@@ -16,7 +19,11 @@ public interface ProductManager {
     public void addProducto(Producto p);
     public void clear();
     public void muestraLista();
-
+    public int getUserSize();
+    public int getProductosSize();
+    public int getPedidosSize();
+    public Collection<User> usersDisp();
+    public User addUserById(String id);
 
 
 

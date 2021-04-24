@@ -1,13 +1,11 @@
-import Clases.Pedido;
-import Clases.Producto;
-import Clases.User;
+import edu.upc.dsa.clases.Pedido;
+import edu.upc.dsa.clases.Producto;
+import edu.upc.dsa.clases.User;
+import edu.upc.dsa.ProductManager;
+import edu.upc.dsa.ProductManagerImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
-import javafx.application.Application;
-
-import java.util.logging.Logger;
 
 
 public class ProductManagerTest {

@@ -1,6 +1,5 @@
-package Clases;
+package edu.upc.dsa.clases;
 
-import Clases.Pedido;
 
 import java.util.LinkedList;
 import java.util.List;

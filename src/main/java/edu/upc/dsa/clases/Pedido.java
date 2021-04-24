@@ -1,8 +1,7 @@
-package Clases;
+package edu.upc.dsa.clases;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 public class Pedido {
 

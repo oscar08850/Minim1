@@ -1,4 +1,4 @@
-package Clases;
+package edu.upc.dsa.clases;
 
 public class Producto {
 
