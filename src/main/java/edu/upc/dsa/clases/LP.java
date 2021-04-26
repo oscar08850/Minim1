@@ -1,7 +1,7 @@
 package edu.upc.dsa.clases;
 
 
-public class LP {
+public class LP { //extens Pedido
 
     public String producto;
     public int cantidad;
@@ -10,6 +10,8 @@ public class LP {
         this.producto = producto;
         this.cantidad = cantidad;
     }
+
+    public LP(){}
 
     public String getProducto() {
         return producto;

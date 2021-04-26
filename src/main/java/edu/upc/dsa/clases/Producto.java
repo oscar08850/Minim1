@@ -11,6 +11,8 @@ public class Producto {
         this.precio = precio;
     }
 
+    public Producto(){}
+
     //Añadimos numero de ventas del producto
     public void addVentas(int ventas){
         this.ventas = this.ventas + ventas;

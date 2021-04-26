@@ -24,6 +24,8 @@ public interface ProductManager {
     public int getPedidosSize();
     public Collection<User> usersDisp();
     public User addUserById(String id);
+    public List<Pedido> getPedidoUser(String user);
+
 
 
 

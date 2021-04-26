@@ -133,6 +133,14 @@ public class ProductManagerImpl implements ProductManager {
         }
     }
 
+    public List<Pedido> getPedidoUser(String user) {
+        //Clases.User---->ListaPedidos--->ListaProductos
+        User usuario = getUser(user);
+        List<Pedido> pedidos = usuario.getListaPedido();
+        return pedidos;
+    }
+
+
     public void clear(){
         productoList.clear();
         usuarios.clear();
