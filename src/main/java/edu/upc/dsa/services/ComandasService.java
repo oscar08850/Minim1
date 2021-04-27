@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Api(value = "/Comandas", description = "Endpoint to Text Service")
-@Path("Comandas")
+@Path("")
 public class ComandasService {
 
     private ProductManager pm;
@@ -65,13 +65,13 @@ public class ComandasService {
             pedido1.addLP("CafeLlet", 3);
             pedido1.setUser("1111");
             pm.addPedido(pedido1);
-            pm.servir();
+            //pm.servir();
 
             pedido2.addLP("Donut", 6);
             pedido2.addLP("CafeLlet", 7);
             pedido2.setUser("1111");
             pm.addPedido(pedido2); //Push2
-            pm.servir();
+            //pm.servir();
 
 
             pedido3.addLP("Cocacola", 3);
@@ -83,7 +83,78 @@ public class ComandasService {
 
     }
 
-    /*
+
+
+
+
+    //(1) Listado de productos ordenado (ascendentemente) por precio
+
+
+    @GET
+    @ApiOperation(value = "get productosByPrice ascendente", notes = "asdasd")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = Producto.class, responseContainer = "List"),
+    })
+    @Path("/productByPrice")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProductoByPrice() {
+
+        List<Producto> productos = this.pm.sortByPrice();
+        GenericEntity<List<Producto>> entity = new GenericEntity<List<Producto>>(productos) {
+        };
+        return Response.status(201).entity(entity).build();
+    }
+
+
+
+
+
+
+
+    //(2) Realizar un pedido (que puede estar formado por diferentes productos y en
+    //diferentes cantidades) por parte de un usuario identificado
+
+
+    @POST
+    @ApiOperation(value = "(2) Create a new Pedido", notes = "asdasd")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = Pedido.class),
+            @ApiResponse(code = 500, message = "Validation Error")
+
+    })
+
+    @Path("/newPedido")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response newTrack(Pedido pedido) {
+
+        if (pedido.getUser() == null || pedido.getLPs() == null)
+            return Response.status(500).entity(pedido).build();
+        this.pm.addPedido(pedido);
+        return Response.status(201).entity(pedido).build();
+    }
+
+
+    //(3) Servir un pedido. Los servicios se realizan en orden de llegadas
+
+    @POST
+    @ApiOperation(value = "(3) Sirve un pedido", notes = "asdasd")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response=Pedido.class),
+            @ApiResponse(code = 500, message = "Pedido no encontrado")
+
+    })
+
+    @Path("/adduser")
+    //@Consumes(MediaType.APPLICATION_JSON)
+    public Response servirPedido() {
+        //pm.servir();
+        Pedido pedido = pm.servir();
+        if (pedido==null)  return Response.status(500).entity(pedido).build();
+        return Response.status(201).entity(pedido).build();
+    }
+
+    //4 Listado de pedidos de un usuario que ya hayan sido realizados
+
     @GET
     @ApiOperation(value = "GET all pedidos por usuario (4)", notes = "asdasd")
     @ApiResponses(value = {
@@ -91,7 +162,7 @@ public class ComandasService {
             @ApiResponse(code = 404, message = "Pedido not found")
 
     })
-    @Path("/{id}")
+    @Path("/sirvePedido/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPedidos(@PathParam("id") String user) {
 
@@ -105,29 +176,30 @@ public class ComandasService {
         else return Response.status(404).entity(entity).build();
 
     }
-    */
 
 
-    //(1) Listado de productos ordenado (ascendentemente) por precio
 
-    /*
+
+    //(5) Listado de productos ordenado (descendentemente) por número de ventas
+
     @GET
-    @ApiOperation(value = "get productosByPrice ascendente", notes = "asdasd")
+    @ApiOperation(value = "get productosBySells descendente", notes = "asdasd")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response = Producto.class, responseContainer = "List"),
     })
-    @Path("/")
+    @Path("/ventasDesc")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProductoByPrice() {
+    public Response getProductosDescBySales() {
 
-        List<Producto> productos = this.pm.sortByPrice();
-        GenericEntity<List<Producto>> entity = new GenericEntity<List<Producto>>(productos) {
+        List<Producto> productos2 = this.pm.sortBySells();
+        GenericEntity<List<Producto>> entity = new GenericEntity<List<Producto>>(productos2) {
         };
         return Response.status(201).entity(entity).build();
     }
 
 
-*/
+
+    //OTROS
 
     @POST //Añadimos una nuevo usuario
     @ApiOperation(value = "create a new User", notes = "asdasd")
@@ -145,71 +217,6 @@ public class ComandasService {
         User user = this.pm.addUserById(idUser);
         return Response.status(201).entity(user).build();
     }
-
-
-    //(2) Realizar un pedido (que puede estar formado por diferentes productos y en
-    //diferentes cantidades) por parte de un usuario identificado
-
-    @POST
-    @ApiOperation(value = "create a new Pedido", notes = "asdasd")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Pedido.class),
-            @ApiResponse(code = 500, message = "Validation Error")
-
-    })
-
-    @Path("/")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response newTrack(Pedido pedido) {
-
-        if (pedido.getUser() == null || pedido.getLPs() == null)
-            return Response.status(500).entity(pedido).build();
-        this.pm.addPedido(pedido);
-        return Response.status(201).entity(pedido).build();
-    }
-
-
-    //(5) Listado de productos ordenado (descendentemente) por número de ventas
-
-    @GET
-    @ApiOperation(value = "get productosBySells descendente", notes = "asdasd")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Producto.class, responseContainer = "List"),
-    })
-    @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getProductosDescBySales() {
-
-        List<Producto> productos2 = this.pm.sortBySells();
-        GenericEntity<List<Producto>> entity = new GenericEntity<List<Producto>>(productos2) {
-        };
-        return Response.status(201).entity(entity).build();
-    }
-
-
-
-    //(3) Servir un pedido. Los servicios se realizan en orden de llegadas
-
-    @POST
-    @ApiOperation(value = "Sirve un pedido", notes = "asdasd")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response=Pedido.class),
-            @ApiResponse(code = 500, message = "Pedido no encontrado")
-
-    })
-
-    @Path("/")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response servirPedido() {
-
-        Pedido pedido = pm.servir();
-        if (pedido==null)  return Response.status(500).entity(pedido).build();
-        this.pm.servir();
-        return Response.status(201).entity(pedido).build();
-    }
-
-
-
 
 
 

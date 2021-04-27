@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Pedido {
 
-    private List<LP> productNames = new ArrayList<LP>();
-    private String user;
+    public List<LP> productNames = new ArrayList<LP>();
+    public String user;
     //
 
     public Pedido(){} // Constructor vacio
