@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 public class ProductManagerImpl implements ProductManager {
 
     List<Producto> productoList = new LinkedList<Producto>();
-
     Queue<Pedido> pendingPedido = new LinkedList<Pedido>();
     HashMap<String, User> usuarios = new HashMap<String, User>();
 

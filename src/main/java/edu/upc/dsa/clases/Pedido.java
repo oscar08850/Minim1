@@ -5,9 +5,17 @@ import java.util.List;
 
 public class Pedido {
 
-    public List<LP> productNames = new ArrayList<LP>();
-    public String user;
+    private List<LP> productNames = new ArrayList<LP>();
+    private String user;
     //
+
+    public List<LP> getProductNames() {
+        return productNames;
+    }
+
+    public void setProductNames(List<LP> productNames) {
+        this.productNames = productNames;
+    }
 
     public Pedido(){} // Constructor vacio
 

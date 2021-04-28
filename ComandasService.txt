@@ -137,16 +137,16 @@ public class ComandasService {
     @ApiOperation(value = "(3) Sirve un pedido", notes = "asdasd")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response=Pedido.class),
-            @ApiResponse(code = 404, message = "Pedido no encontrado")
+            @ApiResponse(code = 500, message = "Pedido no encontrado")
 
     })
 
-    @Path("/servirPedido")
+    @Path("/adduser")
     //@Consumes(MediaType.APPLICATION_JSON)
     public Response servirPedido() {
         //pm.servir();
         Pedido pedido = pm.servir();
-        if (pedido==null)  return Response.status(404).build();
+        if (pedido==null)  return Response.status(500).entity(pedido).build();
         return Response.status(201).entity(pedido).build();
     }
 
